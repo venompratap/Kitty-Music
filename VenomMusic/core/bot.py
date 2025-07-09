@@ -1,6 +1,7 @@
-import uvloop
-
-uvloop.install()
+import sys
+if sys.platform != "win32":
+    import uvloop
+    uvloop.install()
 
 from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
@@ -9,11 +10,11 @@ import config
 from ..logging import LOGGER
 
 
-class Venom(Client):
+class Aviax(Client):
     def __init__(self):
-        LOGGER(__name__).info(f"Starting Bot...")
+        LOGGER(__name__).info("Starting Bot...")
         super().__init__(
-            name="VenomMusic",
+            name="AviaxMusic",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             bot_token=config.BOT_TOKEN,
@@ -25,7 +26,7 @@ class Venom(Client):
     async def start(self):
         await super().start()
         self.id = self.me.id
-        self.name = self.me.first_name + " " + (self.me.last_name or "")
+        self.name = self.me.first_name
         self.username = self.me.username
         self.mention = self.me.mention
 
